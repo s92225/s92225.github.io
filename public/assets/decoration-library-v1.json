@@ -1,0 +1,25 @@
+{
+  "name": "Candy Jelly Decoration Library",
+  "version": 1,
+  "image": "decoration-library-v1.png",
+  "grid": { "columns": 4, "rows": 4 },
+  "style": "glossy translucent pastel gummy 3D",
+  "items": [
+    { "id": "bear-wave", "name": "桃桃熊揮手", "category": "角色", "row": 0, "column": 0 },
+    { "id": "penguin-cheer", "name": "薄荷企鵝打氣", "category": "角色", "row": 0, "column": 1 },
+    { "id": "bear-peek", "name": "桃桃熊探頭", "category": "角色", "row": 0, "column": 2 },
+    { "id": "penguin-cloud", "name": "企鵝雲上睡覺", "category": "角色", "row": 0, "column": 3 },
+    { "id": "gold-star", "name": "金色星星糖", "category": "糖果", "row": 1, "column": 0 },
+    { "id": "jelly-orbs", "name": "紫色啫喱泡泡", "category": "糖果", "row": 1, "column": 1 },
+    { "id": "wrapped-candy", "name": "薄荷包裝糖", "category": "糖果", "row": 1, "column": 2 },
+    { "id": "peach-heart", "name": "蜜桃糖心", "category": "糖果", "row": 1, "column": 3 },
+    { "id": "lavender-cloud", "name": "薰衣草雲", "category": "場景", "row": 2, "column": 0 },
+    { "id": "jelly-rainbow", "name": "啫喱彩虹", "category": "場景", "row": 2, "column": 1 },
+    { "id": "star-cluster", "name": "星星群", "category": "場景", "row": 2, "column": 2 },
+    { "id": "mint-leaf", "name": "薄荷葉", "category": "場景", "row": 2, "column": 3 },
+    { "id": "lavender-bow", "name": "薰衣草蝴蝶結", "category": "框飾", "row": 3, "column": 0 },
+    { "id": "candy-sign", "name": "糖果路牌", "category": "框飾", "row": 3, "column": 1 },
+    { "id": "jelly-balloons", "name": "啫喱氣球", "category": "框飾", "row": 3, "column": 2 },
+    { "id": "candy-garland", "name": "糖心掛飾", "category": "框飾", "row": 3, "column": 3 }
+  ]
+}
