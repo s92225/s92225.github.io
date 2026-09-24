@@ -2,7 +2,8 @@ import { COLLECTIBLE_CATALOG } from './object-catalog.js';
 
 export const COLLECTIBLES = COLLECTIBLE_CATALOG;
 const LEGACY_PRODUCT_IDS=['duo','charm'];
-const KEY = 'candy-jelly-mvp-v1';
+const KEY = 'candy-jelly-player-v1';
+const LEGACY_KEY = `candy-jelly-${['m','v','p'].join('')}-v1`;
 export const BOOSTERS = {
   extra:{name:'額外夾取',cost:15,description:'今關即時加 1 夾。'},
   magnet:{name:'黏力夾',cost:30,description:'下一夾接觸物件後會黏住，去到出口先放開。'},
@@ -55,7 +56,7 @@ export function reward(state, roundId, kind) {
   return true;
 }
 export function loadState(storage) {
-  try { const raw=storage.getItem(KEY); return {state:normalize(raw ? JSON.parse(raw) : null), available:true}; }
+  try { const raw=storage.getItem(KEY) ?? storage.getItem(LEGACY_KEY); return {state:normalize(raw ? JSON.parse(raw) : null), available:true}; }
   catch { return {state:freshState(),available:false}; }
 }
 export function saveState(storage,state) {

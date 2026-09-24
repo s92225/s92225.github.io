@@ -1,0 +1,18 @@
+{
+  "name": "夾夾島 · Candy Jelly",
+  "short_name": "Candy Jelly",
+  "description": "3D 夾爪闖關遊戲",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#faf7ff",
+  "theme_color": "#faf7ff",
+  "lang": "zh-HK",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
