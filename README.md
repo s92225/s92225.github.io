@@ -1,4 +1,4 @@
-# 夾夾島 · Candy Jelly 1.0.0
+# 夾夾島 · Candy Jelly 1.0.1
 
 Candy Jelly 是一款手機優先的 3D 夾爪網頁遊戲，包含 30 個關卡、32 件原創收藏品、三星挑戰、遊戲金幣及三種錦囊。
 
@@ -18,6 +18,7 @@ npm run build
 ## 正式服務
 
 - Google AdSense publisher：`ca-pub-8769011123659282`
+- 獎勵廣告：Google H5 Games Ad Placement API；只會在完整觀看後派發錦囊
 - 網站擁有權驗證：AdSense script、meta tag、`public/ads.txt`
 - 搜尋引擎：`robots.txt`、`sitemap.xml`、canonical URL
 - 安裝體驗：Web App Manifest、獨立顯示模式及主題色
