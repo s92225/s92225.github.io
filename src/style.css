@@ -241,10 +241,10 @@ body.result-open{overflow:hidden}
 .cabinet>.play-meta{position:absolute;z-index:7;top:12px;right:12px;min-height:0;margin:0}
 .cabinet>.play-meta>span{min-height:36px;padding:6px 11px;border:2px solid #fff;border-radius:15px;background:#ffffffed;box-shadow:0 5px 16px #4c35682c}
 .cabinet>.play-meta .icon{width:20px;height:20px}.cabinet>.play-meta b{font-size:15px}
-.cabinet>.round-clock{position:absolute;z-index:7;left:50%;bottom:12px;width:58px;height:48px;margin:0;padding:0;display:grid;place-items:center;transform:translateX(-50%);border:2px solid #fff;border-radius:17px;background:#ffffffed;box-shadow:0 5px 18px #4c35682a;pointer-events:none}
+.cabinet>.round-clock{position:absolute;z-index:7;left:50%;bottom:12px;width:auto;height:auto;margin:0;padding:0;display:grid;place-items:center;transform:translateX(-50%);border:0;background:transparent;box-shadow:none;pointer-events:none}
 .cabinet>.round-clock .clock-number{display:block;min-width:0;color:#7447c8;line-height:1;text-align:center}
-.cabinet>.round-clock .clock-number strong{font-size:35px;line-height:1;font-weight:800}
-.cabinet>.round-clock.urgent{background:#fff0f4}.cabinet>.round-clock.urgent .clock-number{color:#bb5272}
+.cabinet>.round-clock .clock-number strong{font-size:35px;line-height:1;font-weight:800;text-shadow:0 1px 3px #fff,0 0 8px #fff}
+.cabinet>.round-clock.urgent{background:transparent}.cabinet>.round-clock.urgent .clock-number{color:#bb5272}
 .dpad .direction{font-size:28px;font-weight:900;line-height:1}
 #completion-panel.completion-modal .criteria-stars{font-size:40px;line-height:1.05;letter-spacing:4px}
 #completion-panel.completion-modal .criteria-stars span{min-width:28px}
@@ -253,5 +253,11 @@ body.result-open{overflow:hidden}
 #completion-panel.completion-modal .result-card.won>.pill{padding:7px 13px;font-size:12px}
 #completion-panel.completion-modal .result-card.won h2{font-size:25px}
 #completion-panel.completion-modal .result-card.won>p{font-size:12px}
-@media(max-width:360px){.dpad .direction{font-size:25px}.cabinet>.play-meta{top:9px;right:9px}.cabinet>.play-meta>span{min-height:33px;padding:5px 9px}.cabinet>.round-clock{bottom:9px;width:54px;height:44px}.cabinet>.round-clock .clock-number strong{font-size:32px}}
+@media(max-width:360px){.dpad .direction{font-size:25px}.cabinet>.play-meta{top:9px;right:9px}.cabinet>.play-meta>span{min-height:33px;padding:5px 9px}.cabinet>.round-clock{bottom:9px}.cabinet>.round-clock .clock-number strong{font-size:32px}}
 @media(max-height:650px){#completion-panel.completion-modal .criteria-stars{font-size:32px}#completion-panel.completion-modal .criteria-stars span{min-width:23px}#completion-panel.completion-modal .star-criteria.compact span{padding:5px 3px;font-size:9px}#completion-panel.completion-modal .star-criteria.compact b{font-size:16px}#completion-panel.completion-modal .result-card.won>.pill{padding:5px 10px;font-size:10px}#completion-panel.completion-modal .result-card.won h2{font-size:21px}#completion-panel.completion-modal .result-card.won>p{font-size:10px}}
+
+/* v1.0.3: simpler countdown and more readable booster actions. */
+.booster-slot{grid-template-rows:18px 43px 34px;min-height:106px}
+.booster-acquire button{height:34px;padding:3px 4px;font-size:10px;gap:3px}
+.booster-buy .icon{width:13px;height:13px}.booster-restock small{font-size:9px;line-height:1}
+@media(max-width:360px){.booster-slot{grid-template-rows:17px 39px 32px;min-height:99px}.booster-acquire button{height:32px;font-size:9px}.booster-restock small{font-size:8px}}
