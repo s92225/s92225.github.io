@@ -236,3 +236,22 @@ body.result-open{overflow:hidden}
 @media(max-height:650px){#completion-panel.completion-modal{padding:8px}#completion-panel.completion-modal .result-card.won{width:min(420px,calc(100vw - 16px));height:calc(100svh - 16px);grid-template-rows:minmax(170px,1fr) auto auto auto auto auto auto;gap:2px;padding:10px 12px 11px;border-radius:25px}#completion-panel.completion-modal .result-reward-stage{border-radius:21px}#completion-panel.completion-modal .result-prizes{inset:7px 42px 31px}#completion-panel.completion-modal .result-reward-stage>strong{bottom:7px;padding:6px 13px;font-size:14px}#completion-panel.completion-modal .result-card.won h2{font-size:18px}#completion-panel.completion-modal .result-card.won>.pill{padding:4px 9px;font-size:9px}#completion-panel.completion-modal .star-criteria.compact span{padding:3px 2px}#completion-panel.completion-modal .result-card.won>.button{min-height:45px;padding:8px 12px}}
 @media(prefers-reduced-motion:reduce){#completion-panel.completion-modal,#completion-panel.completion-modal .result-card.won{animation:none}}
 .welcome .fine a{color:var(--purple);font-weight:700;text-decoration:underline;text-underline-offset:3px}.legal-page{display:grid;gap:14px;padding-bottom:28px}.legal-page .card{padding:23px}.legal-page h2{font-size:18px;margin:15px 0 8px}.legal-page p{font-size:13px;line-height:1.75}.legal-link{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:14px;padding-top:14px;border-top:1px solid #eee6f5;color:var(--purple);font-size:12px;font-weight:700}.legal-link .icon{width:17px;height:17px}
+
+/* v1.0.2: denser play layout and clearer controls/results. */
+.cabinet>.play-meta{position:absolute;z-index:7;top:12px;right:12px;min-height:0;margin:0}
+.cabinet>.play-meta>span{min-height:36px;padding:6px 11px;border:2px solid #fff;border-radius:15px;background:#ffffffed;box-shadow:0 5px 16px #4c35682c}
+.cabinet>.play-meta .icon{width:20px;height:20px}.cabinet>.play-meta b{font-size:15px}
+.cabinet>.round-clock{position:absolute;z-index:7;left:50%;bottom:12px;width:58px;height:48px;margin:0;padding:0;display:grid;place-items:center;transform:translateX(-50%);border:2px solid #fff;border-radius:17px;background:#ffffffed;box-shadow:0 5px 18px #4c35682a;pointer-events:none}
+.cabinet>.round-clock .clock-number{display:block;min-width:0;color:#7447c8;line-height:1;text-align:center}
+.cabinet>.round-clock .clock-number strong{font-size:35px;line-height:1;font-weight:800}
+.cabinet>.round-clock.urgent{background:#fff0f4}.cabinet>.round-clock.urgent .clock-number{color:#bb5272}
+.dpad .direction{font-size:28px;font-weight:900;line-height:1}
+#completion-panel.completion-modal .criteria-stars{font-size:40px;line-height:1.05;letter-spacing:4px}
+#completion-panel.completion-modal .criteria-stars span{min-width:28px}
+#completion-panel.completion-modal .star-criteria.compact span{padding:8px 5px;font-size:11px;line-height:1.35}
+#completion-panel.completion-modal .star-criteria.compact b{font-size:20px}
+#completion-panel.completion-modal .result-card.won>.pill{padding:7px 13px;font-size:12px}
+#completion-panel.completion-modal .result-card.won h2{font-size:25px}
+#completion-panel.completion-modal .result-card.won>p{font-size:12px}
+@media(max-width:360px){.dpad .direction{font-size:25px}.cabinet>.play-meta{top:9px;right:9px}.cabinet>.play-meta>span{min-height:33px;padding:5px 9px}.cabinet>.round-clock{bottom:9px;width:54px;height:44px}.cabinet>.round-clock .clock-number strong{font-size:32px}}
+@media(max-height:650px){#completion-panel.completion-modal .criteria-stars{font-size:32px}#completion-panel.completion-modal .criteria-stars span{min-width:23px}#completion-panel.completion-modal .star-criteria.compact span{padding:5px 3px;font-size:9px}#completion-panel.completion-modal .star-criteria.compact b{font-size:16px}#completion-panel.completion-modal .result-card.won>.pill{padding:5px 10px;font-size:10px}#completion-panel.completion-modal .result-card.won h2{font-size:21px}#completion-panel.completion-modal .result-card.won>p{font-size:10px}}
