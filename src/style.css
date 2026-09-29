@@ -257,7 +257,11 @@ body.result-open{overflow:hidden}
 @media(max-height:650px){#completion-panel.completion-modal .criteria-stars{font-size:32px}#completion-panel.completion-modal .criteria-stars span{min-width:23px}#completion-panel.completion-modal .star-criteria.compact span{padding:5px 3px;font-size:9px}#completion-panel.completion-modal .star-criteria.compact b{font-size:16px}#completion-panel.completion-modal .result-card.won>.pill{padding:5px 10px;font-size:10px}#completion-panel.completion-modal .result-card.won h2{font-size:21px}#completion-panel.completion-modal .result-card.won>p{font-size:10px}}
 
 /* v1.0.3: simpler countdown and more readable booster actions. */
-.booster-slot{grid-template-rows:18px 43px 34px;min-height:106px}
-.booster-acquire button{height:34px;padding:3px 4px;font-size:10px;gap:3px}
-.booster-buy .icon{width:13px;height:13px}.booster-restock small{font-size:9px;line-height:1}
-@media(max-width:360px){.booster-slot{grid-template-rows:17px 39px 32px;min-height:99px}.booster-acquire button{height:32px;font-size:9px}.booster-restock small{font-size:8px}}
+.booster-slot{grid-template-rows:18px 43px auto;min-height:146px}
+.booster-acquire{grid-template-columns:1fr;grid-template-rows:repeat(2,36px);gap:6px}
+.booster-acquire button{width:100%;height:36px;padding:4px 10px;font-size:11px;gap:6px}
+.booster-buy .icon{width:14px;height:14px}.booster-restock{padding-inline:12px}.booster-restock small{font-size:10px;line-height:1}
+
+/* v1.0.4: breathing room above controls and stacked booster actions. */
+.control-row{margin-top:14px}
+@media(max-width:360px){.control-row{margin-top:12px}.booster-slot{grid-template-rows:17px 39px auto;min-height:137px}.booster-acquire{grid-template-rows:repeat(2,34px);gap:5px}.booster-acquire button{height:34px;padding-inline:8px;font-size:10px}.booster-restock{padding-inline:10px}.booster-restock small{font-size:9px}}
