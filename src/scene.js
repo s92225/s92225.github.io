@@ -14,10 +14,10 @@ export class CabinetView {
     this.renderer.shadowMap.type=T.PCFSoftShadowMap;
     this.renderer.toneMapping=T.ACESFilmicToneMapping;
     this.renderer.toneMappingExposure=.92;
-    this.renderer.domElement.setAttribute('aria-label','即時 3D 夾公仔機：前左方設有紫色出口');
+    this.renderer.domElement.setAttribute('aria-label','即時 3D 夾公仔機：夢幻草地場景，前左方設有紫色出口');
     this.renderer.domElement.setAttribute('role','img');
     container.append(this.renderer.domElement);
-    this.scene=new T.Scene(); this.scene.background=new T.Color('#efe5fb');
+    this.scene=new T.Scene();this.backdropTexture=this.storybookTexture();this.scene.background=this.backdropTexture;
     this.camera=new T.PerspectiveCamera(37,1,.1,80);
     this.scene.add(this.camera);this.celebration=null;
     this.side=false;this.closeUp=false;this.setView(false);
@@ -82,8 +82,19 @@ export class CabinetView {
       wandMint:new T.MeshPhysicalMaterial({color:'#6bd1c0',roughness:.25,clearcoat:.95}),
       jellyBody:new T.MeshPhysicalMaterial({color:'#79ddcf',transparent:true,opacity:.86,roughness:.1,transmission:.08,clearcoat:1}),
       jellyBand:new T.MeshPhysicalMaterial({color:'#fff5fb',transparent:true,opacity:.94,roughness:.3,clearcoat:.65}),
+      meadow:new T.MeshStandardMaterial({color:'#91d797',roughness:.92}),
+      hillMint:new T.MeshStandardMaterial({color:'#73c99e',roughness:.9}),
+      hillLavender:new T.MeshStandardMaterial({color:'#b89ce0',roughness:.88}),
+      path:new T.MeshStandardMaterial({color:'#fff0c4',roughness:.78}),
+      treeTrunk:new T.MeshStandardMaterial({color:'#9b6a72',roughness:.9}),
+      treeMint:new T.MeshStandardMaterial({color:'#78d4b0',roughness:.72}),
+      treePink:new T.MeshStandardMaterial({color:'#f39bbb',roughness:.72}),
+      mushroomStem:new T.MeshStandardMaterial({color:'#fff5df',roughness:.76}),
+      mushroomPink:new T.MeshPhysicalMaterial({color:'#f27ca6',roughness:.34,clearcoat:.72}),
+      mushroomPurple:new T.MeshPhysicalMaterial({color:'#8f67cf',roughness:.34,clearcoat:.72}),
+      flowerGold:new T.MeshPhysicalMaterial({color:'#ffd85c',roughness:.32,clearcoat:.7}),
     };
-    this.buildCabinet(); this.buildClaw(); this.boxMeshes=[];
+    this.buildStorybookMeadow();this.buildCabinet(); this.buildClaw(); this.boxMeshes=[];
     this.syncBoxes();
     this.observer=new ResizeObserver(()=>this.resize());this.observer.observe(container);this.resize();
     this.onContextLost=e=>{e.preventDefault(); this.contextLost=true;container.dispatchEvent(new CustomEvent('webgl-lost'));};
@@ -92,6 +103,34 @@ export class CabinetView {
   rounded(w,h,d,r=.07) { return new RoundedBoxGeometry(w,h,d,3,r); }
   part(w,h,d,x,y,z,mat,r=.04,parent=this.scene) {
     const mesh=new T.Mesh(this.rounded(w,h,d,r),mat);mesh.position.set(x,y,z);mesh.castShadow=true;mesh.receiveShadow=true;parent.add(mesh);return mesh;
+  }
+  storybookTexture() {
+    const canvas=document.createElement('canvas');canvas.width=canvas.height=1024;const ctx=canvas.getContext('2d');
+    const sky=ctx.createLinearGradient(0,0,0,680);sky.addColorStop(0,'#f9e8ff');sky.addColorStop(.48,'#ccecf0');sky.addColorStop(1,'#f9dfe8');ctx.fillStyle=sky;ctx.fillRect(0,0,1024,1024);
+    const cloud=(x,y,s)=>{ctx.fillStyle='#fff9';for(const [dx,dy,r] of [[0,0,48],[48,8,64],[-45,13,52],[12,-25,58]]){ctx.beginPath();ctx.arc(x+dx*s,y+dy*s,r*s,0,Math.PI*2);ctx.fill();}};
+    cloud(180,180,.78);cloud(820,135,.62);cloud(570,290,.43);
+    const hill=(color,y,points)=>{ctx.fillStyle=color;ctx.beginPath();ctx.moveTo(0,1024);ctx.lineTo(0,y);for(const [cx,cy,x,ey] of points)ctx.quadraticCurveTo(cx,cy,x,ey);ctx.lineTo(1024,1024);ctx.closePath();ctx.fill();};
+    hill('#b8dca8',520,[[135,390,300,520],[470,345,650,520],[835,390,1024,520]]);
+    hill('#8ecf9a',610,[[150,505,330,610],[510,460,710,610],[875,500,1024,610]]);
+    const grass=ctx.createLinearGradient(0,570,0,1024);grass.addColorStop(0,'#9ee0a8');grass.addColorStop(1,'#5fb787');ctx.fillStyle=grass;ctx.fillRect(0,590,1024,434);
+    ctx.fillStyle='#fff0c9';ctx.beginPath();ctx.moveTo(455,1024);ctx.bezierCurveTo(410,865,630,765,520,585);ctx.lineTo(570,585);ctx.bezierCurveTo(725,770,545,880,655,1024);ctx.closePath();ctx.fill();
+    for(let i=0;i<52;i++){const x=(i*193)%1000+12,y=630+(i*83)%360,c=['#fff5a8','#ff9fbd','#d8c1ff','#f9f7ff'][i%4];ctx.fillStyle=c;ctx.beginPath();ctx.arc(x,y,4+(i%3),0,Math.PI*2);ctx.fill();}
+    const mushroom=(x,y,s,color)=>{ctx.fillStyle='#fff5df';ctx.fillRect(x-13*s,y,26*s,55*s);ctx.fillStyle=color;ctx.beginPath();ctx.ellipse(x,y,43*s,24*s,0,Math.PI,Math.PI*2);ctx.fill();ctx.fillStyle='#fff8';for(const dx of [-22,0,22]){ctx.beginPath();ctx.arc(x+dx*s,y-5*s,5*s,0,Math.PI*2);ctx.fill();}};
+    mushroom(115,720,1.2,'#f27ca6');mushroom(880,680,.95,'#8f67cf');mushroom(790,860,.62,'#f27ca6');
+    ctx.fillStyle='#fff8c9';ctx.font='700 34px sans-serif';ctx.fillText('✦',75,420);ctx.fillText('✦',900,360);ctx.fillText('✦',740,500);
+    const texture=new T.CanvasTexture(canvas);texture.colorSpace=T.SRGBColorSpace;return texture;
+  }
+  buildStorybookMeadow() {
+    const m=this.materials,ground=new T.Mesh(new T.PlaneGeometry(24,24),m.meadow);ground.rotation.x=-Math.PI/2;ground.position.set(0,-1.86,-1.5);ground.receiveShadow=true;this.scene.add(ground);
+    const hill=(x,z,s,mat)=>{const mesh=new T.Mesh(new T.SphereGeometry(2.3,20,12),mat);mesh.position.set(x,-2.35,z);mesh.scale.set(s,1.05*s,.8*s);mesh.receiveShadow=true;this.scene.add(mesh);};
+    hill(-4.5,-7.2,1.45,m.hillMint);hill(0,-8.2,1.7,m.hillLavender);hill(4.8,-7.5,1.4,m.hillMint);
+    for(let i=0;i<7;i++){const z=-3.15-i*.72,x=Math.sin(i*.85)*.82,stone=this.part(1.15,.07,.58,x,-1.79,z,m.path,.19);stone.rotation.y=Math.sin(i*.7)*.18;}
+    const tree=(x,z,s,pink=false)=>{const group=new T.Group();group.position.set(x,-1.84,z);group.scale.setScalar(s);this.scene.add(group);const trunk=new T.Mesh(new T.CylinderGeometry(.13,.23,1.45,10),m.treeTrunk);trunk.position.y=.72;trunk.castShadow=true;group.add(trunk);const canopyMat=pink?m.treePink:m.treeMint;for(const [cx,cy,cz,r] of [[0,1.62,0,.66],[-.42,1.5,.05,.46],[.4,1.52,.04,.5],[0,2.02,0,.5]]){const leaf=new T.Mesh(new T.SphereGeometry(r,14,10),canopyMat);leaf.position.set(cx,cy,cz);leaf.castShadow=true;group.add(leaf);}};
+    tree(-4.2,-4.7,1.15);tree(4.35,-5.3,1.05,true);tree(-5.15,-.4,.82,true);
+    const mushroom=(x,z,s,purple=false)=>{const group=new T.Group();group.position.set(x,-1.82,z);group.scale.setScalar(s);this.scene.add(group);const stem=new T.Mesh(new T.CylinderGeometry(.12,.18,.6,12),m.mushroomStem);stem.position.y=.3;stem.castShadow=true;group.add(stem);const cap=new T.Mesh(new T.SphereGeometry(.42,18,10),purple?m.mushroomPurple:m.mushroomPink);cap.scale.y=.48;cap.position.y=.68;cap.castShadow=true;group.add(cap);for(const [dx,dz] of [[-.18,-.05],[.12,.08],[.03,-.18]]){const dot=new T.Mesh(new T.SphereGeometry(.055,10,7),m.cream);dot.position.set(dx,.84,dz);group.add(dot);}};
+    mushroom(-3.45,-2.9,1.15);mushroom(3.55,-3.55,.95,true);mushroom(-4.45,.75,.7,true);mushroom(4.25,.25,.72);
+    const flower=(x,z,s,color)=>{const group=new T.Group();group.position.set(x,-1.82,z);group.scale.setScalar(s);this.scene.add(group);const stem=new T.Mesh(new T.CylinderGeometry(.018,.025,.42,8),m.hillMint);stem.position.y=.21;group.add(stem);for(let i=0;i<5;i++){const petal=new T.Mesh(new T.SphereGeometry(.095,10,7),color);const a=i*Math.PI*2/5;petal.position.set(Math.cos(a)*.14,.48,Math.sin(a)*.14);petal.scale.y=.62;group.add(petal);}const center=new T.Mesh(new T.SphereGeometry(.075,10,7),m.flowerGold);center.position.y=.48;group.add(center);};
+    [[-3,-4.2,1,m.treePink],[3.05,-4.4,.9,m.treeMint],[-4.7,-2,.8,m.flowerGold],[4.7,-1.8,.75,m.treePink],[-3.7,1.8,.75,m.treeMint],[3.8,1.45,.7,m.flowerGold]].forEach(v=>flower(...v));
   }
   buildCabinet() {
     const m=this.materials;
@@ -145,12 +184,11 @@ export class CabinetView {
     this.part(5.1,.20,.22,0,3.75,-2.27,m.frame);
     this.part(5.1,.15,.15,0,3.75,2.27,m.frame);
     for(const x of [-2.5,2.5]) this.part(.17,.17,4.6,x,3.75,0,m.frame);
-    // Soft illustrated backboard is decorative; all prizes/claw are true 3D.
-    const backBase=new T.Mesh(new T.PlaneGeometry(4.8,3.3),new T.MeshBasicMaterial({color:'#eadffc',side:T.DoubleSide,toneMapped:false}));
+    // Storybook meadow backboard is decorative; all prizes/claw are true 3D.
+    const backBase=new T.Mesh(new T.PlaneGeometry(4.8,3.3),new T.MeshBasicMaterial({color:'#8ed09b',side:T.DoubleSide,toneMapped:false}));
     backBase.position.set(0,1.75,-2.19);this.scene.add(backBase);
-    const backMaterial=new T.MeshBasicMaterial({transparent:true,opacity:0,side:T.DoubleSide,depthWrite:false,toneMapped:false});
+    const backMaterial=new T.MeshBasicMaterial({map:this.backdropTexture,transparent:true,opacity:.96,side:T.DoubleSide,depthWrite:false,toneMapped:false});
     const back=new T.Mesh(new T.PlaneGeometry(4.8,3.3),backMaterial);back.position.set(0,1.75,-2.18);back.renderOrder=1;this.scene.add(back);
-    new T.TextureLoader().load('/assets/mascots.png',texture=>{if(this.disposed){texture.dispose();return;}texture.colorSpace=T.SRGBColorSpace;texture.anisotropy=Math.min(4,this.renderer.capabilities.getMaxAnisotropy());this.backTexture=texture;backMaterial.map=texture;backMaterial.opacity=1;backMaterial.needsUpdate=true;},undefined,()=>{backMaterial.opacity=0;});
     for(let x=-1.9;x<2;x+=.48) {
       this.part(.09,.035,.09,x,.025,-1.93,m.glow,.015);
     }
